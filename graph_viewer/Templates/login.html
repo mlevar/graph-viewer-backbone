@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>graph-viwer</title>
+
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/bootstrap.css"/>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/lib/jquery.min.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/lib/bootstrap.min.js"></script>
+
+    <style type="text/css">
+      /* Override some defaults */
+      html, body {
+        background-color: #eee;
+      }
+      body {
+        padding-top: 40px; 
+      }
+      .container {
+        width: 300px;
+      }
+
+      /* The white background content wrapper */
+      .container > .content {
+        background-color: #fff;
+        padding: 20px;
+        margin: 0 -20px; 
+        -webkit-border-radius: 10px 10px 10px 10px;
+           -moz-border-radius: 10px 10px 10px 10px;
+                border-radius: 10px 10px 10px 10px;
+        -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+           -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+                box-shadow: 0 1px 2px rgba(0,0,0,.15);
+      }
+
+	  .login-form {
+		margin-left: 65px;
+	  }
+    </style>
+
+</head>
+<body>
+<div class="container">
+<div class="content">
+	<div class="row">
+		<div class="login-form">
+			<h2>Login</h2>
+            (administrator x2)
+			<form method="post" action="">
+                {% csrf_token %}
+				<fieldset>
+                    
+                    <div class="control-group clearfix {% if msg and type %}error{% endif %}" id="username">
+                      <div class="controls">
+                        <input id="username" type="text" placeholder="Username" name="username" maxlength="20" value="{{username}}"/>
+                        <span id="username-help" class="help-inline"></span>
+                      </div>
+                    </div>
+					<div class="control-group clearfix {% if msg %}error{% endif %}" id="password">
+                      <div class="controls">
+                        <input id="password" type="password" placeholder="Password" name="password" maxlength="20" value="{{password}}"/>
+                        <span id="password-help" class="help-inline"></span>
+                      </div>
+                    </div>
+                    <input class="btn btn-primary" id="submit-btn" type="submit" value="Sign in">
+				</fieldset>     
+			</form>
+		</div>
+         {% if msg %}
+        <div class="alert alert-error" style="margin-left:25px">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>Error!</strong> {{msg}}
+        </div>
+        {% endif %}
+	</div>
+</div>
+</div> 
+
+<script>
+$('#username').change(function(){
+    $('#username').removeClass('error');
+});
+$('#password').change(function(){
+    $('#password').removeClass('error');
+});
+</script>
+
+</body>
+</html>
+
+{% comment %}
+<script>
+$('#id_username').input(function(){
+    x = $('#id_username');
+    if ( !( /^[\w\- ]+$/.test( x.val() )) ) {
+        $('#username').addClass('error');
+        x.addClass('invalid');
+        $('#submit-btn').attr('disabled', 'disabled');
+        $('#username-help').text("Username is required!");
+    }else{
+        $('#username').removeClass('error');
+        x.removeClass('invalid');
+        $('#submit-btn').removeAttr('disabled');
+        $('#username-help').text("");
+    }
+});
+$('#id_password').input(function(){
+    x = $('#id_password');
+    if ( !( /^[\w\- ]+$/.test( x.val() )) ) {
+        $('#password').addClass('error');
+        x.addClass('invalid');
+        $('#submit-btn').attr('disabled', 'disabled');
+        $('#password-help').text("Password is required!");
+    }else{
+        $('#password').removeClass('error');
+        x.removeClass('invalid');
+        $('#submit-btn').removeAttr('disabled');
+        $('#password-help').text("");
+    }
+});
+</script>
+{% endcomment %}
