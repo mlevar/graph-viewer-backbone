@@ -1,0 +1,68 @@
+{% extends "frame.html" %}
+
+{% block skripte %}
+    <script type="text/javascript" src="{{ STATIC_URL }}js/d3.v2.min.js"></script>
+    
+{% endblock %}
+
+{% block onload %}
+   "$('#home').addClass('active');"
+{% endblock %}
+
+{% block menu_items %}
+    <li>
+        <div class="form-inline" style="margin:5px;">
+        <input id="linkDst" type="text" class="input-mini" placeholder="Link-Distance" title="Link-Distance" >
+        <input id="selfDst" type="text" class="input-mini" placeholder="Self-Link" title="Self-Link-Distance" >
+        <input id="charge" type="text" class="input-mini" placeholder="Charge" title="Charge" >
+    </div>
+    </li>
+    <li>
+        <a id="graphname"></a>
+    </li>
+{% endblock %}
+
+{% block content %}
+
+<style>
+
+.node {
+  stroke: #fff;
+  stroke-width: 1.5px;
+}
+
+.link {
+  stroke: #666;
+  stroke-opacity: .6px;
+}
+text {
+  font: 10px sans-serif;
+  font-weight:bold;
+  pointer-events: none;
+}
+
+path.link {
+  fill: none;
+  stroke: #666;
+  stroke-width: 1.5px;
+}
+circle {
+  fill: #ccc;
+  stroke: #333;
+  stroke-width: 1.5px;
+}
+</style>
+
+<div id="canvas" style="margin-left:auto; margin-right:auto;">
+      
+</div>
+<script type="text/javascript" src="{{ STATIC_URL }}js/graph.js"></script>
+
+
+<form id="svgform" method="post" action="getpdf/">
+    {% csrf_token %}
+    <input type="hidden" id="output_format" name="output_format" value="">
+    <input type="hidden" id="data" name="data" value="">
+</form>
+
+{% endblock %}

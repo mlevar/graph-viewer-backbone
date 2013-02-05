@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="graphViewer">
+<head>
+    <meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8"/>
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/jquery.ui.custom.min.css"/>
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/default.css"/>
+	
+    <title>graph viewer</title>
+
+    <script type="text/javascript" src="{{ STATIC_URL }}js/lib/jquery.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/lib/jquery.ui.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/lib/bootstrap.min.js"></script>
+
+</head>
+<body ng-controller="FrameCtrl">
+
+<div class="container-narrow">
+    <div class="masthead">
+		<div class="navbar navbar-static-top">
+		<div class="navbar-inner">
+			<span class="brand">graph viewer</span>
+			<ul class="nav">
+                <li ng-class="{active: currentUrl == '' || currentUrl == '/' || currentUrl == '/#/'}" id="home"><a href="/#/">Home</a></li>		               
+                <li ng-class="{active: currentUrl == '/graphs/'}" id="graphs"><a href="/#/graphs/">Graphs</a></li>     	
+                                         
+                <li ng-show="menu=='index'">
+                    <div class="form-inline" style="margin:5px;">
+                    <input id="linkDst" type="text" class="input-mini" placeholder="Link-Distance" title="Link-Distance" >
+                    <input id="selfDst" type="text" class="input-mini" placeholder="Self-Link" title="Self-Link-Distance" >
+                    <input id="charge" type="text" class="input-mini" placeholder="Charge" title="Charge" >
+                </div>
+                </li>
+                <li ng-show="menu=='index'"><a id="graphname"></a></li>
+
+                <a ng-show="menu=='graphs'" class="btn btn-primary pull-left" style="margin-left:5px; margin-right:5px" href="/#/graphs/new" id="new">Add New</a>
+
+                <form ng-show="menu=='graphs'"  class="navbar-search pull-left">
+                  <input ng-model="search" type="text" class="search-query" placeholder="Search">
+                </form>
+
+            </ul>
+            <ul class="nav pull-right">
+                <li><a href="/logout/">{{ user.username }}, sign out here</a></li>
+		    </ul>
+	    </div>
+	    </div>
+	</div>
+
+    <div class="content" ng-view>	    
+	</div>
+</div>
+
+<div class="footer navbar-fixed-bottom" >
+    <p id="foot">
+    <span class="brand">mlevar, 2012/2013 </span>
+    </p>
+</div>
+</body>
+
+<!-- ANGULAR -->
+
+<script type="text/javascript" src="{{ STATIC_URL }}js/lib/angular/angular.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/lib/angular/angular-resource.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/app/app.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/app/controllers.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/app/filters.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/app/services.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/app/directives.js"></script>
+</html>
