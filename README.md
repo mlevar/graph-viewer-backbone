@@ -1,7 +1,3 @@
-graph-viewer-angular
+graph-viewer-backbone
 ====================
-Showcase app built with AngularJS and Django with Tastypie.
-
-Things to explore further:
-	-asynchronous updates, creates and deletes lag behind the list view
-	-explore angular-ui, especially ui-if
+Showcase app built with backboneJS and Django with Tastypie.
