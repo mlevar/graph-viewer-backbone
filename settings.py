@@ -14,10 +14,10 @@ DATABASES = {
 
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'graph_viewer_angular',                      # Or path to database file if using sqlite3.
-        'USER': 'root',                      # Not used with sqlite3.
-        'PASSWORD': 'root',                  # Not used with sqlite3.
-        'HOST': '127.0.0.1',                      # Set to empty string for localhost. Not used with sqlite3.
+        'NAME': 'd5uhqlaqqrc6ok',                      # Or path to database file if using sqlite3.
+        'USER': 'xrbeyhvrhjukqb',                      # Not used with sqlite3.
+        'PASSWORD': 'Av8OoTM3avpDysMTukKQY1QLBj',                  # Not used with sqlite3.
+        'HOST': 'ec2-54-243-190-113.compute-1.amazonaws.com',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '3306',                      # Set to empty string for default. Not used with sqlite3.
     }
 }
