@@ -1,0 +1,76 @@
+
+<center>
+
+
+<form class="form-horizontal" style="width:500px; margin:10px; margin-top:40px;">
+
+    <div class="control-group" id="name">
+      <label class="control-label" for="id_name">Graph name:*</label>
+      <div class="controls">
+        <input ng-model="graph.name" name="name" maxlength="70" placeholder="Name" required="" type="text" id="id_name" value="<%=graph.attributes.name%>"/>
+        <span id="name-help" class="help-inline"></span>
+      </div>
+    </div>
+    
+    <div class="control-group" id="nodes">
+      <label class="control-label" for="id_nodes">Graph data:*</label>
+      <div class="controls">
+        <textarea ng-model="graph.nodes" rows="10" name="nodes" required="" placeholder="Json graph: {&quot;nodes&quot;:[[source, destination],...]}" cols="40" id="id_nodes"><%=graph.attributes.nodes%></textarea>
+        <span id="nodes-help" class="help-inline"></span>
+      </div>
+    </div>
+    <button ng-click="save(graph)" class="btn btn-primary" id="submit-btn" disabled>Update</button>
+</form>
+</center>
+
+<script>
+function checkRegexp( o, regexp, n ) {
+    if ( !( regexp.test( o.val() ) ) ) {
+        o.addClass( "ui-state-error" );
+        updateTips( n );
+        return false;
+    } else {
+        return true;
+    }
+}
+
+$('#id_name').blur(function(){
+    x = $('#id_name');
+    if ( !( /^[\w\- ]+$/.test( x.val() ))) {
+        $('#name').addClass('error');
+        x.addClass('invalid');
+        $('#submit-btn').attr('disabled', 'disabled');
+        $('#name-help').text("You must enter a name!");
+    }else{
+        $('#name').removeClass('error');
+        x.removeClass('invalid');
+        $('#submit-btn').removeAttr('disabled');
+        $('#name-help').text("");
+    }
+});
+    $('#id_nodes').blur(function(){
+    x = $('#id_nodes');
+    ok = true;
+    try
+    {
+       var json = JSON.parse(x.val());
+       if (!(json.nodes instanceof Array))
+            ok = false;
+    }
+    catch(e)
+    {
+       ok = false;
+    }   
+    if ( !ok) {
+        $('#nodes').addClass('error');
+        x.addClass('invalid');
+        $('#submit-btn').attr('disabled', 'disabled');
+        $('#nodes-help').text("Enter valid json nodes! {\"nodes\":[[source, destination],...]}");
+    }else{
+        $('#nodes').removeClass('error');
+        x.removeClass('invalid');
+        $('#submit-btn').removeAttr('disabled');
+        $('#nodes-help').text("");
+    }
+});
+</script>

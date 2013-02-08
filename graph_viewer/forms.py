@@ -18,7 +18,6 @@ class UserForm(forms.ModelForm):
         self.fields['password'].max_length = 20
         self.fields['password'].min_length = 5
 
-
     class Meta:
         model = User
         fields = ('username', 'password')
@@ -36,3 +35,17 @@ class GraphForm(forms.ModelForm):
     class Meta:
         model = Graph
         fields = ('name', 'author', 'nodes')
+
+    def clean(self):
+        cleaned_data = super(GraphForm, self).clean()
+        nodes = cleaned_data.get("nodes")
+        subject = cleaned_data.get("subject")
+
+        if cc_myself and subject:
+            # Only do something if both fields are valid so far.
+            if "help" not in subject:
+                raise forms.ValidationError("Did not send for 'help' in "
+                        "the subject despite CC'ing yourself.")
+
+        # Always return the full collection of cleaned data.
+        return cleaned_data

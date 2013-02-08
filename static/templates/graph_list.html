@@ -1,0 +1,46 @@
+<div class="container-table" >
+<% if(graphs.length == 0) { %>
+
+<div>
+    <h3>Graphs</h3>
+    <p>No graphs found!!! :(</p>
+</div>
+<% } else { %>
+<table class="table table-striped table-hover table-condensed" ng-hide="graphs==undefined">
+        <tr>
+            <th style="width:30%;">Graph name</th>
+            <th style="width:30%;">Author</th>
+            <th style="width:20%;">Date</th>
+            <th style="width:20%;">Options</td>
+        </tr>
+        <% _.each(graphs, function(g){ %>
+        <tr>
+            <td style="width:30%;"><%= g.get("name") %></td>
+            <td style="width:30%;"><%= g.get("author").username %></td>
+            <td style="width:20%;"><%= g.get("date") %></td>
+            <td style="width:20%;">                 
+                <a class="view btn btn-mini btn-primary" value="<%= g.get("id_graph") %>">View</a>
+                <a class="btn btn-mini btn-info" href="/#/graphs/<%= g.get("id_graph") %>/" >Edit</a>
+                <a class="delete btn btn-mini btn-danger" value="<%= g.get("id_graph") %>">Delete</a>
+            </td>
+        </tr>
+        <% }); %>
+</table>
+<% } %>
+
+<% if(pageInfo.pages > 1) { %>
+    <div class="pagination pagination-centered">
+    <ul>
+        <li <% if(!pageInfo.prev) { %> class="disabled" <% } %>>      
+           <a href="#" class="prev">Prev</a>
+        </li>
+            <li class="disabled">
+                <a> Page <%= Math.ceil(pageInfo.range[0] / pageInfo.limit) %> of <%= pageInfo.pages %></a>
+            </li>
+        <li <% if(!pageInfo.next) { %> class="disabled" <% } %>>  
+           <a href="#" class="next">Next</a>
+        </li>
+    </ul>
+    </div>
+<% } %>
+</div>
